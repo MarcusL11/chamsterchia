@@ -1,0 +1,1174 @@
+{% extends "../base.html" %}
+{% load static %}
+{% block body %}
+<div>
+  <!-- Large Sscreen Start -->
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div
+      class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+      <h1 class="text-4xl font-bold tracking-tight">
+        Chamster Golfers
+      </h1>
+      <!-- Sort button Start-->
+      <div class="flex items-center">
+        <div class="relative inline-block text-left">
+          <div>
+            <button
+              type="button"
+              class="group inline-flex justify-center text-sm font-medium"
+              id="sort-button"
+              aria-expanded="false"
+              aria-haspopup="true">
+              Sort by
+              <svg
+                class="-mr-1 ml-1 h-5 w-5 flex-shrink-0"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd" />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none bg-base-100"
+            id="dropdown-menu"
+            role="menu"
+            style="display: none"
+            aria-orientation="vertical"
+            aria-labelledby="sort-button"
+            tabindex="-1">
+            <div class="py-1" role="none">
+              <a
+                href=""
+                class="block px-4 py-2 text-sm"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-0"
+                >Lowest TSI</a
+              >
+              <a
+                href=""
+                class=" block px-4 py-2 text-sm "
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-1"
+                >Highest TSI</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Sort Button end -->
+    </div>
+
+    <section aria-labelledby="products-heading" class="pb-24 pt-6">
+      <h2 id="products-heading" class="sr-only">Attributes</h2>
+
+      <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+        <!-- Filters scroll section start-->
+        <div class="max-h-[calc(200vh-0px)] overflow-y-auto">
+          <form class="hidden lg:block m-4">
+            <h3 class="border-b font-bold ">NFT </h3>
+            <!-- Series Link Start-->
+            <div class="">
+              <h3 class="flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-series"
+                  class="flex w-full items-center justify-between"
+                  aria-controls="filter-section-sesries"
+                  aria-expanded="false">
+                  <span class="font-medium">Series</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-series"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-series"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+                <ul
+                  role="list"
+                  class="text-sm "
+                  id="filter-section-series"
+                  style="display: none">
+                  <li>
+                    <button id="btn-getGolfer" class="">
+                      Golfers
+                    </button>
+                  </li>
+                  <li>
+                    <button id="btn-getGolfCourse" class="">
+                      Golf Courses
+                    </button>
+                  </li>
+                  <li>
+                    <button id="btn-getGolfHoles" class="">
+                      Golf Holes
+                    </button>
+                  </li>
+                </ul>
+              </h3>
+            </div>
+            <!-- Series Link End-->
+
+            <h3 class="border-b mt-6 font-bold ">Item Attributes</h3>
+
+            <!-- Name Filter Start -->
+            <div class="border-b border-gray-200 py-2">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-name"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-name"
+                  aria-expanded="false">
+                  <span class="font-medium ">Name</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-name"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-name"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-name"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_name %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-name-{{ forloop.counter }}"
+                      name="name[]"
+                      value="{{ item.name }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-name-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.name }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Name Filter End -->
+
+            <!-- Background Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-background"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-background"
+                  aria-expanded="false">
+                  <span class="font-medium ">Background</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-background"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-background"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-background"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_background %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-background-{{ forloop.counter }}"
+                      name="background[]"
+                      value="{{ item.background }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-background-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.background }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Background Filter End -->
+
+            <!-- Fur Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-fur"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-fur"
+                  aria-expanded="false">
+                  <span class="font-medium ">Fur</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-fur"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-fur"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div class="pt-6" id="filter-section-fur" style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_fur %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-fur-{{ forloop.counter }}"
+                      name="fur[]"
+                      value="{{ item.fur }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-fur-{{ forloop.counter }}"
+                      class="ml-3 text-sm ">
+                      {{ item.fur }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Fur Filter End -->
+
+            <!-- Shirt Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-shirt"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-shirt"
+                  aria-expanded="false">
+                  <span class="font-medium ">Shirt</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-shirt"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-shirt"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-shirt"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_shirt %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-shirt-{{ forloop.counter }}"
+                      name="shirt[]"
+                      value="{{ item.shirt }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-shirt-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.shirt }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Shirt Filter End -->
+
+            <!-- Pants Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-pants"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-pants"
+                  aria-expanded="false">
+                  <span class="font-medium ">Pants</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-pants"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-pants"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-pants"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_pants %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-pants-{{ forloop.counter }}"
+                      name="pants[]"
+                      value="{{ item.pants }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-pants-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.pants }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Pants Filter End -->
+
+            <!-- Head Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-head"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-head"
+                  aria-expanded="false">
+                  <span class="font-medium ">Head</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-head"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-head"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-head"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_head %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-color-{{ forloop.counter }}"
+                      name="head[]"
+                      value="{{ item.head }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-head-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.head }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Head Filter End -->
+
+            <!-- Eyes Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-eyes"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-eyes"
+                  aria-expanded="false">
+                  <span class="font-medium ">Eyes</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-eyes"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-eyes"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-eyes"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_eyes %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-eyes-{{ forloop.counter }}"
+                      name="eyes[]"
+                      value="{{ item.eyes }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-eyes-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.eyes }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Eyes Filter End -->
+
+            <!-- Club Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-club"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-club"
+                  aria-expanded="false">
+                  <span class="font-medium ">Club</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-club"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-club"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-club"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_club %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-club-{{ forloop.counter }}"
+                      name="club[]"
+                      value="{{ item.club }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-club-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.club }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Club Filter End -->
+
+            <h3 class="border-b py-2 pt-6 font-bold">
+              Skill Attributes
+            </h3>
+
+            <!-- Power Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-power"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-7"
+                  aria-expanded="false">
+                  <span class="font-medium ">Power</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-power"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-power"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-power"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_power %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-power-{{ forloop.counter }}"
+                      name="power[]"
+                      value="{{ item.power }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-power-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.power }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Power Filter End -->
+
+            <!-- Putting Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-putting"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-putting"
+                  aria-expanded="false">
+                  <span class="font-medium ">Putting</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-putting"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-putting"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-putting"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_putting %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-putting-{{ forloop.counter }}"
+                      name="putting[]"
+                      value="{{ item.putting }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-seondary" />
+                    <label
+                      for="filter-putting-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.putting }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Putting Filter End -->
+
+            <!-- Accuracy Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-accuracy"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-9"
+                  aria-expanded="false">
+                  <span class="font-medium ">Accuracy</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-accuracy"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-accuracy"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-accuracy"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_accuracy %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-accuracy-{{ forloop.counter }}"
+                      name="accuracy[]"
+                      value="{{ item.accuracy }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:secondary" />
+                    <label
+                      for="filter-accuracy-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.accuracy }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Accuracy Filter End -->
+
+            <!-- Luck Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-luck"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-luck"
+                  aria-expanded="false">
+                  <span class="font-medium ">Luck</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-luck"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-luck"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-luck"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_luck %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-luck-{{ forloop.counter }}"
+                      name="luck[]"
+                      value="{{ item.luck }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-luck-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.luck }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Luck Filter End -->
+
+            <!-- Recovery Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-recovery"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-recovery"
+                  aria-expanded="false">
+                  <span class="font-medium ">Recovery</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-recovery"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-recovery"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-recovery"
+                style="display: none">
+                <div class="space-y-4">
+                  {% for item in unique_recovery %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-recovery-{{ forloop.counter }}"
+                      name="recovery[]"
+                      value="{{ item.recovery }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-recovery-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.recovery }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Recovery Filter End -->
+
+            <!-- Specialy Filter Start -->
+            <div class="border-b border-gray-200 py-6">
+              <h3 class="-my-3 flow-root">
+                <!-- Expand/collapse section button -->
+                <button
+                  type="button"
+                  id="toggle-specialty"
+                  class="flex w-full items-center justify-between  py-3 text-sm  "
+                  aria-controls="filter-section-specialty"
+                  aria-expanded="false">
+                  <span class="font-medium ">Specialty</span>
+                  <span class="ml-6 flex items-center">
+                    <!-- Expand icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 expand-icon"
+                      id="expand-specialty"
+                      style="display: block"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                    </svg>
+                    <!-- Collapse icon, show/hide based on section open state. -->
+                    <svg
+                      class="h-5 w-5 collapse-icon"
+                      id="collapse-specialty"
+                      style="display: none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H4.75A.75.75 0 014 10z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
+              <!-- Filter section, show/hide based on section state. -->
+              <div
+                class="pt-6"
+                id="filter-section-specialty"
+                style="display: None">
+                <div class="space-y-4">
+                  {% for item in unique_specialty %}
+                  <div class="flex items-center">
+                    <input
+                      id="filter-specialty-{{ forloop.counter }}"
+                      name="specialty[]"
+                      value="{{ item.specialty }}"
+                      type="checkbox"
+                      class="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary" />
+                    <label
+                      for="filter-specialty-{{ forloop.counter }}"
+                      class="ml-3 text-sm "
+                      >{{ item.specialty }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <!-- Specialty Filter End -->
+
+          </form>
+        </div>
+        <!-- Filters scroll section end-->
+
+        <!-- Product grid start -->
+        <div class="lg:col-span-3">
+          <!--Pagnation of nft cards Start-->
+          <div class="flex items-center justify-between px-4 py-3 sm:px-2">
+            <div class="flex flex-1 justify-between sm:hidden">
+              <a
+                href="#"
+                class="relative inline-flex items-center rounded-md border  px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 "
+                >Previous-test</a
+              >
+              <a
+                href="#"
+                class="relative ml-3 inline-flex items-center rounded-md border  px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 "
+                >Next-test</a
+              >
+            </div>
+            <div
+              class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+              <div>
+                <p class="text-sm ">
+                  <span class="font-medium">Page</span>
+
+                  <span id="pageValue" class="font-medium">1</span>
+
+                  <span class="font-medium"></span>
+                </p>
+              </div>
+              <div>
+                <nav
+                  class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                  aria-label="Pagination">
+                  <button
+                    id="prevButton"
+                    class="relative inline-flex items-center rounded-l-md px-2 py-2  ring-1 ring-inset ring-gray-300 hover:bg-gray-100  focus:z-20 focus:outline-offset-0">
+                    <span class="sr-only">Previous</span>
+                    <svg
+                      class="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                  <button
+                    id="nextButton"
+                    class="relative inline-flex items-center rounded-r-md px-2 py-2  ring-1 ring-inset ring-gray-300 hover:bg-gray-100  focus:z-20 focus:outline-offset-0">
+                    <span class="sr-only">Next</span>
+                    <svg
+                      class="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        fill-rule="evenodd"
+                        d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                        clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <!--Pagnation of nft cards End-->
+
+          <!--NFT Card Section start -->
+          <div class="items-container">
+            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-8">
+              {% for item in chamster %}
+              <div class="group relative">
+                <div
+                  class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                  <img
+                    src="{% static 'chamsterapp/img/nft/golfers/'|add:item.encoded_id|add:'.png' %}"
+                    alt=""
+                    class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+                </div>
+                <div class="mt-4 flex justify-between">
+                  <div>
+                    <h3 class="text-sm  hover:">
+                      <a href=""> <!-- CHAMSTER PROFILE -->
+                        <span
+                          aria-hidden="true"
+                          class="absolute inset-0"></span>
+                        {{ item.name|slice:"15:" }}
+                      </a>
+                      <span class="flex">TSI: {{ item.tsi }}</span>
+                      {% if "Birdie Seeker" in item.specialty %}
+                        <span class="flex">{{ item.specialty }}</span>
+                      {% elif "Bunker King" in item.specialty %}
+                        <span class="flex">{{ item.specialty }}</span>
+                      {% elif "Fairway Finder" in item.specialty %}
+                        <span class="flex">{{ item.specialty }}</span>
+                      {% elif "Windcheater" in item.specialty %}
+                        <span class="flex">{{ item.specialty }}</span>                                                
+                      {% elif "Zoomie" in item.specialty %}
+                        <span class="flex">{{ item.specialty }}</span>                                                                        
+                      {% else %}    
+                        <span class="flex"></span>
+                      {% endif %}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!--NFT Card Section end -->
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="{% static 'chamsterapp/js/nft.js' %}"></script>
+
+
+{% endblock body %}

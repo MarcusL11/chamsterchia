@@ -1,0 +1,4 @@
+<h1> hello </h1>
+{% for post in markdown_content %}
+<li><a href="{% url 'blog-content' slug=post.slug %}"> {{ post.title }} </a></li>
+{% endfor %}

@@ -1,0 +1,7 @@
+{% extends "../base.html" %}
+{% load dmd_extras %}
+
+{% block body %}
+    {{ markdown_content.title }}
+    {{ markdown_content.content|render_markdown }}
+{% endblock body %}

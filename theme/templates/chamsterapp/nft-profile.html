@@ -1,0 +1,176 @@
+{% extends "../base.html" %} 
+{% load static %} 
+{% block body %}
+<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <section class="nft-prof-nav">
+    <div class="w-layout-blockcontainer container w-container">
+      <div class="nft-profile-link-block">
+        <a href="{% url "nftGallery" %}" class="link-3">NFT Golfers / </a>
+        <a href="{% url "nftProfile" pk=nft_profile.id %}" class="link-3">{{nft_profile.name}}</a>
+      </div>
+    </div>
+  </section>
+  <!-- Tailwind PRoduct Page testing -->
+  <div class="bg-gray-100 dark:bg-gray-800 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row -mx-4">
+        <div class="md:flex-1 px-4">
+          <div class="h-[460px] rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
+            <img class="w-full h-full object-contain" src="{% static "chamsterapp/img/nft/golfers/"|add:nft_profile.encoded_id|add:".png" %}" alt="Chamster Profile Image">
+          </div>
+        </div>
+        <div class="md:flex-1 px-4">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">{{nft_profile.name}}</h2>
+          <div class="flex mb-4">
+            <div class="mr-4">
+              <span class="font-bold text-gray-700 dark:text-gray-300">Last Traded:</span>
+              <span class="text-gray-600 dark:text-gray-300">XCH 1.25</span>
+            </div>
+            <div>
+              <span class="font-bold text-gray-700 dark:text-gray-300">Current Offer:</span>
+              <span class="text-gray-600 dark:text-gray-300">XCH 4.25</span>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="flex items-center">
+              <span class="font-bold text-gray-700 dark:text-gray-300">NFT Address:</span>
+              <p class="px-2 text-ellipsis overflow-hidden ... w-20">{{ nft_profile.encoded_id }}</p>
+            </div>
+            <div class="flex items-center">
+              <span class="font-bold text-gray-700 dark:text-gray-300">Wallet Address:</span>
+              <p class="px-2 text-ellipsis overflow-hidden ... w-20">{{ nft_profile.owner_address }}</p>
+            </div>                  
+            <div class="flex items-center mt-2">
+              <button class="btn btn-outline mx-2">Send Offer</button>
+              <button class="btn btn-outline mx-2">Challenge</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section>
+    <!--Equipment Tab Start 1-->    
+    <div role="tablist" class="tabs tabs-lifted mb-8">
+      <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Equipment" checked/>
+      <div role="tabpanel" class="tab-content border-primary rounded-box p-6">
+        <div class="flex flex-row">
+          <div class="w-1/8 p-4 text-sm">
+            <!-- Content for the left column -->
+            <div class="mb-4 font-bold">Equipment</div>
+            <div class="mb-4">Background:</div>
+            <div class="mb-4">Head:</div>
+            <div class="mb-4">Eyes:</div>
+            <div class="mb-4">Fur:</div>
+            <div class="mb-4">Shirt:</div>
+            <div class="mb-4">Pants:</div>
+            <div class="mb-4">Club</div>
+          </div>
+          <div class="w-1/8 p-4 text-sm">
+            <!-- Content for the right column -->
+            <div class="mx-4 mb-4 font-bold">Value</div>
+            <div class="mx-4 mb-4">{{nft_profile.background}}</div>
+            <div class="mx-4 mb-4">{{nft_profile.head}}</div>
+            <div class="mx-4 mb-4">{{nft_profile.eyes}}</div>
+            <div class="mx-4 mb-4">{{nft_profile.fur}}</div>
+            <div class="mx-4 mb-4">{{nft_profile.shirt}}</div>              
+            <div class="mx-4 mb-4">{{nft_profile.pants}}</div>
+            <div class="mx-4 mb-4">{{nft_profile.club}}</div>              
+          </div>
+        </div>
+      </div>
+      <!--Equipment Tab End -->
+
+      <!--Skill Tab Start-->
+      <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Skill" />
+      <div role="tabpanel" class="tab-content border-primary rounded-box p-6">
+        <div class="flex flex-row">
+          <div class="w-1/8 p-4 text-sm">
+            <!-- Content for the left column -->
+            <div class="mb-4 font-bold">Skill</div>
+            <div class="mb-4">Power:</div>
+            <div class="mb-4">Accuracy:</div>
+            <div class="mb-4">Putting:</div>
+            <div class="mb-4">Luck:</div>
+            <div class="mb-4">Recovery:</div>
+            <div class="mb-4">Specialty</div>
+          </div>
+          <div class="w-1/8 p-4 text-sm">
+            <!-- Content for the right column -->
+            <div class="mb-4 font-bold">Value</div>
+            <div class="mb-4">{{nft_profile.power}}</div>
+            <div class="mb-4">{{nft_profile.accuracy}}</div>
+            <div class="mb-4">{{nft_profile.putting}}</div>
+            <div class="mb-4">{{nft_profile.luck}}</div>
+            <div class="mb-4">{{nft_profile.recovery}}</div>              
+            <div class="mb-4">{{nft_profile.specialty}}</div>
+          </div>
+        </div>
+      </div>
+      <!--Skill Tab End-->
+
+      <!--Recent Tournament Tab Start-->
+      <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Recent Tournament" />
+      <div role="tabpanel" class="tab-content border-primary rounded-box p-6">
+        <table class="table table-xs">
+          <thead>
+            <tr>
+              <th></th> 
+              <th>Date</th>
+              <th>Opponent</th> 
+              <th>Course</th> 
+              <th>Format</th>
+              <th>Score</th>                     
+              <th>Result</th> 
+              <th>Winnings</th> 
+            </tr>
+          </thead> 
+          <tbody>
+            <tr>
+            <th>1</th> 
+            <td>Jan-17-24</td> 
+            <td>#145</td> 
+            <td>Whiskers Woods</td> 
+            <td>Match Play</td>                   
+            <td>75 (+3)</td> 
+            <td>2 UP</td> 
+            <td>$SFS 100</td>
+            </tr>
+          </tbody> 
+        </table>          
+      </div>
+      <!--Recent Tournament Tab End-->
+
+      <!--Recent PvPs Tab Start-->
+      <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Recent PvPs" />
+      <div role="tabpanel" class="tab-content border-primary rounded-box p-6">
+        <table class="table table-xs">
+          <thead>
+            <tr>
+              <th></th> 
+              <th>Date</th>
+              <th>Event</th> 
+              <th>Course</th> 
+              <th>Score</th> 
+              <th>Placement</th> 
+              <th>Winnings</th> 
+            </tr>
+          </thead> 
+          <tbody>
+            <tr>
+            <th>1</th> 
+            <td>Jan-15-24</td> 
+            <td>Chamster Founders Open</td> 
+            <td>Whiskers Woods</td> 
+            <td>73 (+1)</td> 
+            <td>13th</td> 
+            <td>$SFS 50</td>
+            </tr>
+          </tbody> 
+        </table>          
+      </div>       
+      <!--Recent PvPs Tab End--> 
+    </div> 
+  </section>
+</div>
+{% endblock body %}

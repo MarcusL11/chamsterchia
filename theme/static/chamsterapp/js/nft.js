@@ -91,21 +91,6 @@ function toggleCheckboxes(categories) {
   });
 }
 
-
-function setPageView() {
-    const url = window.location.href;
-    const pageParam = 'page=';
-    const pageIndex = url.indexOf(pageParam)
-    const pageValueElement = document.getElementById('pageValue');
-    if (pageIndex !== -1) {
-        let pageValue = parseInt(url.slice(pageIndex + pageParam.length));
-        pageValueElement.textContent = pageValue;
-    } else {
-        pageValueElement.textContent = 1;
-    }
-}
-
-
 function sortByTsi() {
   const ascendButton = document.getElementById('menu-item-0');
   const descendButton = document.getElementById('menu-item-1');
@@ -166,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ]);
 
     toggleSection([
+        { buttonId: '#toggle-series', expandId: '#expand-series', collapseId: '#collapse-series', sectionId: '#filter-section-series'},
         { buttonId: '#toggle-name', expandId: '#expand-name', collapseId: '#collapse-name', sectionId: '#filter-section-name' },
         { buttonId: '#toggle-background', expandId: '#expand-background', collapseId: '#collapse-background', sectionId: '#filter-section-background' },
         { buttonId: '#toggle-fur', expandId: '#expand-fur', collapseId: '#collapse-fur', sectionId: '#filter-section-fur' },
@@ -181,8 +167,6 @@ document.addEventListener('DOMContentLoaded', function () {
         { buttonId: '#toggle-recovery', expandId: '#expand-recovery', collapseId: '#collapse-recovery', sectionId: '#filter-section-recovery' },
         { buttonId: '#toggle-specialty', expandId: '#expand-specialty', collapseId: '#collapse-specialty', sectionId: '#filter-section-specialty' },
     ]);
-
-    setPageView();
 
     sortByTsi();
 });

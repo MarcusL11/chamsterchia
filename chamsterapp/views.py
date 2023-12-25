@@ -45,13 +45,10 @@ def nftGallery(request):
     items_per_page = 24
     perpage = request.GET.get("perpage", items_per_page)
     paginator = Paginator(chamsters, perpage)
-
-    # Apply pagination
-    try:
-        page = request.GET.get("page", 1)
-        chamsters = paginator.page(page)
-    except EmptyPage:
-        chamsters = paginator.page(paginator.num_pages)
+    page_number = request.GET.get("page", 1)
+    total_pages = paginator.num_pages
+    page_param = request.GET.get("page")
+    all_items = chamsters.count()
 
     # Extracting unique values from attributes
     unique_values = {}
@@ -60,7 +57,25 @@ def nftGallery(request):
             Chamster.objects.values(param.replace('search_', '')).distinct().order_by(param.replace('search_', ''))
         )
 
-    main_data = {"chamster": chamsters, **unique_values}
+    # Apply pagination
+    try:
+        chamsters = paginator.page(page_number)
+    except EmptyPage:
+        chamsters = paginator.page(paginator.num_pages)
+
+    if page_param and page_param.isdigit() and int(page_param) > 1:
+        current_items = items_per_page * int(page_param)
+    else:
+        current_items = items_per_page
+    
+    main_data = {
+        "chamster": chamsters, 
+        "page_number" : page_number,
+        "total_pages": total_pages,
+        "current_items": current_items,
+        "all_items": all_items, 
+        **unique_values
+    }
 
     return render(request, "chamsterapp/nft-gallery.html", main_data)
 

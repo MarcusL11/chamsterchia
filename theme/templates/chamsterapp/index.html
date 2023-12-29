@@ -1,19 +1,28 @@
 {% extends "../base.html" %}
 {% load static %}
-{% block body %}
-<div class="hero min-h-screen bg-base-200">
-  <div class="hero-content flex-col lg:flex-row-reverse">
-    <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" class="max-w-sm rounded-lg shadow-2xl" />
+
+{% block hero %}
+<div class="hero min-h-screen relative">
+  <div class="absolute inset-0 z-0">
+    <img src="{% static "img/hero-img.png" %}" alt="Background" class="object-cover w-full h-full opacity-75" />
+  </div>  
+  <div class="hero-content -mt-20 mr-20 flex-col lg:flex-row-reverse">
     <div>
-      <h1 class="text-5xl font-bold">Box Office News!</h1>
-      <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-      <button class="btn btn-primary">Get Started</button>
+      <h1 class="text-5xl font-bold lg:text-left">A NFT SimGolf Game</h1>
+      <p class="py-4 lg:w-1/2 lg:text-left text-center">Own your very own golfer and compete in tournaments and against other players for rewards!</p>
+      <button class="btn btn-primary"><a href={% url "nftGallery" %}>View NFTs</a></button>
     </div>
-  </div>
+  </div>  
 </div>
-<div class="hero min-h-screen bg-base-200">
+{% endblock hero %}
+
+{% block body %}
+<div class="flex justify-center items-center mt-12">
+  <p class="py-6 text-center md:w-1/2">Golf Simulation on Chia's blockchain. NFT Golfers, $SFS tokens power unique gameplay. Collect, trade, compete in a groundbreaking fusion of gaming and blockchain technology</p>
+</div>  
+<div class="hero min-h-screen bg-gradient-to-r from-base-100 to-transparent">
   <div class="hero-content flex-col lg:flex-row">
-    <img src="https://daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" class="max-w-sm rounded-lg shadow-2xl" />
+    <img src="{% static "img/beerhat_example.png" %}" class="w-1/3 h-1/3 rounded-lg shadow-2xl" />
     <div>
       <h1 class="text-5xl font-bold">Box Office News!</h1>
       <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>

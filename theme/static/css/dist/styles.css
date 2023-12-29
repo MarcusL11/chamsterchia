@@ -1728,67 +1728,10 @@ html {
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
 
-.join {
-  display: inline-flex;
-  align-items: stretch;
-  border-radius: var(--rounded-btn, 0.5rem);
-}
-
-.join :where(.join-item) {
-  border-start-end-radius: 0;
-  border-end-end-radius: 0;
-  border-end-start-radius: 0;
-  border-start-start-radius: 0;
-}
-
-.join .join-item:not(:first-child):not(:last-child),
-  .join *:not(:first-child):not(:last-child) .join-item {
-  border-start-end-radius: 0;
-  border-end-end-radius: 0;
-  border-end-start-radius: 0;
-  border-start-start-radius: 0;
-}
-
-.join .join-item:first-child:not(:last-child),
-  .join *:first-child:not(:last-child) .join-item {
-  border-start-end-radius: 0;
-  border-end-end-radius: 0;
-}
-
 .join .dropdown .join-item:first-child:not(:last-child),
   .join *:first-child:not(:last-child) .dropdown .join-item {
   border-start-end-radius: inherit;
   border-end-end-radius: inherit;
-}
-
-.join :where(.join-item:first-child:not(:last-child)),
-  .join :where(*:first-child:not(:last-child) .join-item) {
-  border-end-start-radius: inherit;
-  border-start-start-radius: inherit;
-}
-
-.join .join-item:last-child:not(:first-child),
-  .join *:last-child:not(:first-child) .join-item {
-  border-end-start-radius: 0;
-  border-start-start-radius: 0;
-}
-
-.join :where(.join-item:last-child:not(:first-child)),
-  .join :where(*:last-child:not(:first-child) .join-item) {
-  border-start-end-radius: inherit;
-  border-end-end-radius: inherit;
-}
-
-@supports not selector(:has(*)) {
-  :where(.join *) {
-    border-radius: inherit;
-  }
-}
-
-@supports selector(:has(*)) {
-  :where(.join *:has(.join-item)) {
-    border-radius: inherit;
-  }
 }
 
 .link {
@@ -2647,16 +2590,6 @@ details.collapse summary::-webkit-details-marker {
   text-align: inherit;
 }
 
-.join > :where(*:not(:first-child)) {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-inline-start: -1px;
-}
-
-.join-item:focus {
-  isolation: isolate;
-}
-
 .link:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -3268,46 +3201,6 @@ details.collapse summary::-webkit-details-marker {
   padding: 0px;
 }
 
-.join.join-vertical {
-  flex-direction: column;
-}
-
-.join.join-vertical .join-item:first-child:not(:last-child),
-  .join.join-vertical *:first-child:not(:last-child) .join-item {
-  border-end-start-radius: 0;
-  border-end-end-radius: 0;
-  border-start-start-radius: inherit;
-  border-start-end-radius: inherit;
-}
-
-.join.join-vertical .join-item:last-child:not(:first-child),
-  .join.join-vertical *:last-child:not(:first-child) .join-item {
-  border-start-start-radius: 0;
-  border-start-end-radius: 0;
-  border-end-start-radius: inherit;
-  border-end-end-radius: inherit;
-}
-
-.join.join-horizontal {
-  flex-direction: row;
-}
-
-.join.join-horizontal .join-item:first-child:not(:last-child),
-  .join.join-horizontal *:first-child:not(:last-child) .join-item {
-  border-end-end-radius: 0;
-  border-start-end-radius: 0;
-  border-end-start-radius: inherit;
-  border-start-start-radius: inherit;
-}
-
-.join.join-horizontal .join-item:last-child:not(:first-child),
-  .join.join-horizontal *:last-child:not(:first-child) .join-item {
-  border-end-start-radius: 0;
-  border-start-start-radius: 0;
-  border-end-end-radius: inherit;
-  border-start-end-radius: inherit;
-}
-
 .tabs-md :where(.tab) {
   height: 2rem;
   font-size: 0.875rem;
@@ -3356,18 +3249,6 @@ details.collapse summary::-webkit-details-marker {
 
 .card-normal .card-title {
   margin-bottom: 0.75rem;
-}
-
-.join.join-vertical > :where(*:not(:first-child)) {
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: -1px;
-}
-
-.join.join-horizontal > :where(*:not(:first-child)) {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-inline-start: -1px;
 }
 
 .menu-sm :where(li:not(.menu-title) > *:not(ul):not(details):not(.menu-title)),
@@ -3440,12 +3321,20 @@ details.collapse summary::-webkit-details-marker {
   position: sticky;
 }
 
+.inset-0 {
+  inset: 0px;
+}
+
 .right-0 {
   right: 0px;
 }
 
 .isolate {
   isolation: isolate;
+}
+
+.z-0 {
+  z-index: 0;
 }
 
 .z-10 {
@@ -3497,6 +3386,10 @@ details.collapse summary::-webkit-details-marker {
   margin-right: -0.25rem;
 }
 
+.-mt-20 {
+  margin-top: -5rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -3521,8 +3414,16 @@ details.collapse summary::-webkit-details-marker {
   margin-left: 0.75rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .ml-6 {
   margin-left: 1.5rem;
+}
+
+.mr-20 {
+  margin-right: 5rem;
 }
 
 .mr-4 {
@@ -3545,8 +3446,8 @@ details.collapse summary::-webkit-details-marker {
   margin-top: 1.5rem;
 }
 
-.ml-4 {
-  margin-left: 1rem;
+.mt-12 {
+  margin-top: 3rem;
 }
 
 .block {
@@ -3613,6 +3514,14 @@ details.collapse summary::-webkit-details-marker {
   height: 100vh;
 }
 
+.h-1\/2 {
+  height: 50%;
+}
+
+.h-1\/3 {
+  height: 33.333333%;
+}
+
 .max-h-\[calc\(200vh-0px\)\] {
   max-height: calc(200vh - 0px);
 }
@@ -3653,6 +3562,14 @@ details.collapse summary::-webkit-details-marker {
   width: 100%;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-1\/3 {
+  width: 33.333333%;
+}
+
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -3663,6 +3580,10 @@ details.collapse summary::-webkit-details-marker {
 
 .max-w-sm {
   max-width: 24rem;
+}
+
+.max-w-md {
+  max-width: 28rem;
 }
 
 .flex-1 {
@@ -3711,10 +3632,6 @@ details.collapse summary::-webkit-details-marker {
 
 .content-start {
   align-content: flex-start;
-}
-
-.items-end {
-  align-items: flex-end;
 }
 
 .items-center {
@@ -3850,6 +3767,20 @@ details.collapse summary::-webkit-details-marker {
   background-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-bg-opacity)));
 }
 
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.from-base-100 {
+  --tw-gradient-from: var(--fallback-b1,oklch(var(--b1)/1)) var(--tw-gradient-from-position);
+  --tw-gradient-to: var(--fallback-b1,oklch(var(--b1)/0)) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-transparent {
+  --tw-gradient-to: transparent var(--tw-gradient-to-position);
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -3905,6 +3836,11 @@ details.collapse summary::-webkit-details-marker {
   padding-bottom: 0.75rem;
 }
 
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .py-6 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -3915,12 +3851,12 @@ details.collapse summary::-webkit-details-marker {
   padding-bottom: 2rem;
 }
 
-.pb-24 {
-  padding-bottom: 6rem;
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 
-.pb-6 {
-  padding-bottom: 1.5rem;
+.pb-24 {
+  padding-bottom: 6rem;
 }
 
 .pr-4 {
@@ -3935,12 +3871,12 @@ details.collapse summary::-webkit-details-marker {
   padding-top: 1.5rem;
 }
 
-.pb-2 {
-  padding-bottom: 0.5rem;
-}
-
 .text-left {
   text-align: left;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .font-serif {
@@ -4001,14 +3937,18 @@ details.collapse summary::-webkit-details-marker {
   color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
 }
 
+.text-primary {
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
+}
+
 .text-secondary {
   --tw-text-opacity: 1;
   color: var(--fallback-s,oklch(var(--s)/var(--tw-text-opacity)));
 }
 
-.text-primary {
-  --tw-text-opacity: 1;
-  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
+.opacity-75 {
+  opacity: 0.75;
 }
 
 .shadow {
@@ -4141,10 +4081,6 @@ details.collapse summary::-webkit-details-marker {
     justify-content: flex-end;
   }
 
-  .sm\:justify-center {
-    justify-content: center;
-  }
-
   .sm\:px-2 {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -4157,6 +4093,10 @@ details.collapse summary::-webkit-details-marker {
 }
 
 @media (min-width: 768px) {
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+
   .md\:flex-1 {
     flex: 1 1 0%;
   }
@@ -4173,6 +4113,10 @@ details.collapse summary::-webkit-details-marker {
 
   .lg\:block {
     display: block;
+  }
+
+  .lg\:w-1\/2 {
+    width: 50%;
   }
 
   .lg\:w-1\/4 {
@@ -4194,6 +4138,10 @@ details.collapse summary::-webkit-details-marker {
   .lg\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .lg\:text-left {
+    text-align: left;
   }
 }
 

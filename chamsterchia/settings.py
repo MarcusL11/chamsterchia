@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'chamsterapp',
     'tailwind',
     'theme',
-    'blog'
+    'blog',
+    'chartjs',
 ]
 
 

@@ -82,8 +82,14 @@ def nftGallery(request):
 def nftProfile(request, pk=None):
     if pk:
         nft_profile = Chamster.objects.get(pk=pk)
+        labels = ["power", "putting", "accuracy", "recovery", "luck"]
+        data = [8, 5, 10, 3, 4]
+
+        profile_data = {
+            "nft_profile": nft_profile, 
+            "chart_data": data,
+        }
+        return render(request, "chamsterapp/nft-profile.html", profile_data)
     else:
         nft_profile = "Error"
-    
-    profile_data = {"nft_profile": nft_profile}
-    return render(request, "chamsterapp/nft-profile.html", profile_data)
+        return render(request, "chamsterapp/nft-profile.html", {"nft_profile": nft_profile})

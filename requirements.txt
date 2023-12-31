@@ -1,6 +1,7 @@
 asgiref==3.7.2
 Django==5.0
 django-browser-reload==1.12.1
+django-chartjs==2.3.0
 django-tailwind==3.8.0
 Markdown==3.5.1
 sqlparse==0.4.4

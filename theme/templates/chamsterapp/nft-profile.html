@@ -16,16 +16,18 @@
       <div class="flex flex-col md:flex-row -mx-4 mb-4">
         <!-- Left Column NFT Picture -->
         <div class="md:flex-1 px-4">
-          <img class="w-full h-full object-contain rounded-lg" src="{% static "chamsterapp/img/nft/golfers/"|add:nft_profile.encoded_id|add:".png" %}" alt="Chamster Profile Image">
+          <img class="shadow-xl w-full h-full object-contain rounded-lg" src="{% static "chamsterapp/img/nft/golfers/"|add:nft_profile.encoded_id|add:".png" %}" alt="Chamster Profile Image">
         </div>
         <!-- Right Column NFT Profile -->
         <div class="md:flex-1 px-4">
-          <div class="bg-primary rounded-lg p-4 shadow">
+          <div class="bg-transparent rounded-lg p-4 shadow-xl ">
             <h2 class="text-2xl font-bold text-gray-800 mb-2">{{nft_profile.name}}</h2>
             <div class="justify-between">
-              <div class="grid grid-cols-2">
-                <p>Radar Chart of skill goes here</p>
-              </div>
+              <div class="grid grid-cols-1 item-center justify-center">
+               
+                <canvas id="myChart"></canvas>
+              
+              </div>              
               <div class="grid grid-cols-2">
                 <span class="font-bold">Series: </span>
                 <span class="text-end text-ellipsis overflow-hidden ...">Golfers</span>
@@ -56,11 +58,6 @@
               </div>                            
             </div>
           </div>
-          <!--Action Buttons -->
-          <div class="flex items-center justify-center mt-2">
-            <button class="btn btn-outline mx-2">Send Offer</button>
-            <button class="btn btn-outline mx-2">Challenge</button>
-          </div>
         </div>
       </div>
       <!--Tabs-->
@@ -68,7 +65,7 @@
         <!--Equipment Tab Start 1-->    
         <div role="tablist" class="tabs tabs-lifted">
           <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Equipment" checked/>
-          <div role="tabpanel" class="tab-content rounded-box p-2 bg-primary">
+          <div role="tabpanel" class="tab-content rounded-box shadow-xl p-2 bg-transparent">
             <div class="flex flex-row">
               <div class="w-1/8 p-4 text-sm">
                 <!-- Content for the left column -->
@@ -96,7 +93,7 @@
 
           <!--Skill Tab Start-->
           <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Skill" />
-          <div role="tabpanel" class="tab-content bg-primary rounded-box p-2">
+          <div role="tabpanel" class="tab-content bg-transparent shadow-xl rounded-box p-2">
             <div class="flex flex-row">
               <div class="w-1/8 p-4 text-sm">
                 <!-- Content for the left column -->
@@ -122,7 +119,7 @@
 
           <!--Recent Tournament Tab Start-->
           <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Recent Tournament" />
-          <div role="tabpanel" class="tab-content bg-primary rounded-box p-2">
+          <div role="tabpanel" class="tab-content bg-transparent shadow-xl rounded-box p-2">
             <table class="table table-xs">
               <thead>
                 <tr>
@@ -154,7 +151,7 @@
 
           <!--Recent PvPs Tab Start-->
           <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Recent PvPs" />
-          <div role="tabpanel" class="tab-content bg-primary rounded-box p-2">
+          <div role="tabpanel" class="tab-content bg-transparent shadow-xl rounded-box p-2">
             <table class="table table-xs">
               <thead>
                 <tr>
@@ -186,4 +183,50 @@
     </div>
   </div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const radar_data = {{ radar_data|safe }};
+  const radar_labels = [
+      "Power",
+      "Accuracy",
+      "Lucky",
+      "Recovery",
+      "Putting",
+  ];
+
+  const myChart = new Chart('myChart', {
+      type: 'radar',
+      data: {
+          labels: radar_labels,
+          datasets: [
+              {
+                  label: 'Skills',
+                  data: radar_data,
+                  fill: true,
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                  borderColor: 'rgb(255, 99, 132)',
+                  pointBorderColor: '#fff',
+                  borderDash: [3, 5],
+                  tension: 0.2,
+              }
+          ]
+      },
+      options: {
+          elements: {
+            line: {
+              borderWidth: 2.5
+            }
+          },
+          scales: {
+            r: {
+                angleLines: {
+                    display: false
+                },
+                suggestedMin: 0,
+                suggestedMax: 15
+            }
+        }
+      }
+  });
+</script>
 {% endblock body %}

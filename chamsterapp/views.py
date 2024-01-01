@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage
 from .models import Chamster
+from django.db.models import Avg
 
 # Create your views here.
 
@@ -80,12 +81,24 @@ def nftGallery(request):
     return render(request, "chamsterapp/nft-gallery.html", main_data)
 
 def nftProfile(request, pk=None):
-    
     if pk:
         nft_profile = Chamster.objects.get(pk=pk)
+        chamsters = Chamster.objects.all()
+        average_power = chamsters.aggregate(avg_power=Avg('power'))['avg_power']
+        average_accuracy = chamsters.aggregate(avg_accuracy=Avg('accuracy'))['avg_accuracy']
+        average_luck = chamsters.aggregate(avg_luck=Avg('luck'))['avg_luck']
+        average_recovery = chamsters.aggregate(avg_recovery=Avg('recovery'))['avg_recovery']
+        average_putting = chamsters.aggregate(avg_putting=Avg('putting'))['avg_putting']
 
         profile_data = {
             "nft_profile": nft_profile,
+            "avg_data": [
+                average_power,
+                average_accuracy,
+                average_luck,
+                average_recovery,
+                average_putting,
+            ],
             "radar_data": [
                 nft_profile.power, 
                 nft_profile.accuracy, 
@@ -93,7 +106,6 @@ def nftProfile(request, pk=None):
                 nft_profile.recovery, 
                 nft_profile.putting
             ],
-            # Add other necessary attributes from the model
         }
         return render(request, "chamsterapp/nft-profile.html", profile_data)
     else:

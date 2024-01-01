@@ -186,6 +186,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   const radar_data = {{ radar_data|safe }};
+  const radar_data2 = {{ avg_data|safe }}
+  
   const radar_labels = [
       "Power",
       "Accuracy",
@@ -195,38 +197,47 @@
   ];
 
   const myChart = new Chart('myChart', {
-      type: 'radar',
-      data: {
-          labels: radar_labels,
-          datasets: [
-              {
-                  label: 'Skills',
-                  data: radar_data,
-                  fill: true,
-                  backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                  borderColor: 'rgb(255, 99, 132)',
-                  pointBorderColor: '#fff',
-                  borderDash: [3, 5],
-                  tension: 0.2,
-              }
-          ]
+    type: 'radar',
+    data: {
+      labels: radar_labels,
+      datasets: [
+        {
+          label: "{{nft_profile.name}}",
+          data: radar_data,
+          fill: true,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgb(255, 99, 132)',
+          pointBorderColor: '#fff',
+          borderDash: [3, 5],
+          tension: 0.2,
+        },
+        {
+          label: "Average",
+          data: radar_data2,
+          backgroundColor: 'rgba(144, 238, 144, 0.2)',
+          borderColor: 'rgb(34, 139, 34)',
+          pointBorderColor: '#fff',
+          borderDash: [3, 5],
+          tension: 0.2,
+        },          
+      ]
+    },
+    options: {
+      elements: {
+        line: {
+          borderWidth: 2.5
+        }
       },
-      options: {
-          elements: {
-            line: {
-              borderWidth: 2.5
-            }
+      scales: {
+        r: {
+          angleLines: {
+            display: false
           },
-          scales: {
-            r: {
-                angleLines: {
-                    display: false
-                },
-                suggestedMin: 0,
-                suggestedMax: 15
-            }
+          suggestedMin: 0,
+          suggestedMax: 30
         }
       }
+    }
   });
 </script>
 {% endblock body %}

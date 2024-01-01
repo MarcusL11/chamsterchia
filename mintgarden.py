@@ -1,5 +1,4 @@
 # Mintgarden API to call on NFT owner's XCH_addresses
-from time import sleep
 import requests
 import time
 

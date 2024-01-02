@@ -21,10 +21,22 @@ function toggleSort(buttonId, sectionId) {
     const sortSection = document.querySelector(sectionId);
     const button = document.querySelector(buttonId);
 
-    button.addEventListener('click', function () {
-        const expanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !expanded);
+    const toggleMenu = () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', !expanded);
         sortSection.style.display = expanded ? 'none' : 'block';
+    };
+
+    button.addEventListener('click', function (event) {
+        event.stopPropagation(); // Prevents immediate closing when the button is clicked
+        toggleMenu();
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!button.contains(event.target) && event.target !== sortSection) {
+            button.setAttribute('aria-expanded', 'false');
+            sortSection.style.display = 'none';
+        }
     });
 }
 

@@ -16,6 +16,22 @@
     {% include "partials/_header.html" %}
   </header>
   <body>
+    <script>
+      const storedTheme = localStorage.getItem('selectedTheme');
+      if (storedTheme) {
+        document.documentElement.setAttribute('data-theme', storedTheme);
+        document.getElementById('themeSelector').checked = storedTheme !== 'cupcake';
+      }
+      
+      const themeSelector = document.getElementById('themeSelector');
+      themeSelector.addEventListener('change', handleThemeChange);
+  
+      function handleThemeChange() {
+        const selectedTheme = themeSelector.checked ? themeSelector.value : 'cupcake';
+        document.documentElement.setAttribute('data-theme', selectedTheme);
+        localStorage.setItem('selectedTheme', selectedTheme);
+      }
+    </script>    
     {% block hero %}
     {% endblock hero %}
     <div class="container mx-auto sm:w-full">

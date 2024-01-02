@@ -1,0 +1,24 @@
+[
+    {
+        "model": "chamsterapp.Chamster",
+        "pk": "ee91c738f2507726980c13bbb7ae0e691358d12ad20d15a0964403747300743c",
+        "fields": {
+            "encoded_id": "nft1a6guww8j2pmjdxqvzwam0tswdyf435f26gx3tgykgsphgucqws7qmthqhk",
+            "name": "Chamster Golfer #114",
+            "background": "Farm Field",
+            "fur": "Brown Fur",
+            "shirt": "Pink Shirt",
+            "pants": "White Pants",
+            "head": "Beer Helmet",
+            "eyes": "Blue Shades",
+            "club": "Iron",
+            "power": 1,
+            "putting": 1,
+            "accuracy": 6,
+            "recovery": 6,
+            "luck": 15,
+            "specialty": "None",
+            "tsi": 29
+        }
+    }
+]

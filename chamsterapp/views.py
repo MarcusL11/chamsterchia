@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage
 from .models import Chamster
 from django.db.models import Avg
+import requests
+import logging
 
 # Create your views here.
 
@@ -82,33 +84,82 @@ def nftGallery(request):
 
 def nftProfile(request, pk=None):
     if pk:
-        nft_profile = Chamster.objects.get(pk=pk)
-        chamsters = Chamster.objects.all()
-        average_power = chamsters.aggregate(avg_power=Avg('power'))['avg_power']
-        average_accuracy = chamsters.aggregate(avg_accuracy=Avg('accuracy'))['avg_accuracy']
-        average_luck = chamsters.aggregate(avg_luck=Avg('luck'))['avg_luck']
-        average_recovery = chamsters.aggregate(avg_recovery=Avg('recovery'))['avg_recovery']
-        average_putting = chamsters.aggregate(avg_putting=Avg('putting'))['avg_putting']
+        try: 
+            nft_profile = Chamster.objects.get(pk=pk)
+            chamsters = Chamster.objects.all()
+    
+            mintgarden_api = f"https://api.mintgarden.io/nfts/{nft_profile.encoded_id}"
+            # tkn1qqqkwv2pvfep3g5e4f3tgyj08khgr83y7v02akgkwv2pvfepsqqq5y62vy Spacescan api
+            response = requests.get(mintgarden_api)
+        
+            if response.status_code == 200:
+                mintgarden_api = response.json()
+            
+                average_power = chamsters.aggregate(avg_power=Avg('power'))['avg_power']
+                average_accuracy = chamsters.aggregate(avg_accuracy=Avg('accuracy'))['avg_accuracy']
+                average_luck = chamsters.aggregate(avg_luck=Avg('luck'))['avg_luck']
+                average_recovery = chamsters.aggregate(avg_recovery=Avg('recovery'))['avg_recovery']
+                average_putting = chamsters.aggregate(avg_putting=Avg('putting'))['avg_putting']
 
-        profile_data = {
-            "nft_profile": nft_profile,
-            "avg_data": [
-                average_power,
-                average_accuracy,
-                average_luck,
-                average_recovery,
-                average_putting,
-            ],
-            "radar_data": [
-                nft_profile.power, 
-                nft_profile.accuracy, 
-                nft_profile.luck, 
-                nft_profile.recovery, 
-                nft_profile.putting
-            ],
-        }
-        return render(request, "chamsterapp/nft-profile.html", profile_data)
+                collection_name = mintgarden_api["data"]["metadata_json"]["collection"]["name"]
+                owner_address = mintgarden_api["owner_address"]["id"]
+
+                # owner_did = mintgarden_api["owner"]["did"]
+                # if owner_did is not None and owner_did != "Null":
+                #     # If owner_did is neither None nor "Null", keep its value
+                #     pass
+                # else:
+                #     owner_did = "Null"
+
+                if "Legendary" in nft_profile.name:
+                    chamster_type = "Legendary"
+                else:
+                    chamster_type = "Normal"
+
+                xch_price = mintgarden_api.get("xch_price")
+
+                if xch_price is not None and xch_price != "Null":
+                    # If xch_price is neither None nor "Null", keep its value
+                    pass
+                else:
+                    xch_price = "Make an Offer"
+
+
+                profile_data = {
+                    "nft_profile": nft_profile,
+                    "collection_name": collection_name,
+                    "owner_address": owner_address,
+                    # "owner_did": owner_did,
+                    "chamster_type": chamster_type,
+                    "xch_price": xch_price,
+                    "avg_data": [
+                        average_power,
+                        average_accuracy,
+                        average_luck,
+                        average_recovery,
+                        average_putting,
+                    ],
+                    "radar_data": [
+                        nft_profile.power, 
+                        nft_profile.accuracy, 
+                        nft_profile.luck, 
+                        nft_profile.recovery, 
+                        nft_profile.putting
+                    ],
+                }
+                return render(request, "chamsterapp/nft-profile.html", profile_data)
+            else:
+                error_message = f"Failed to fetch data from Mintgarden API: {response.status_code}"
+                logging.error(error_message)
+                return render(request, "chamsterapp/nft-profile.html", {"error_message": error_message})
+        except Chamster.DoesNotExist:
+            nft_profile = "Error: NFT not found"
+            return render(request, "chamsterapp/nft-profile.html", {"nft_profile": nft_profile})
+        except Exception as e:
+            error_message = f"An error occurred: {str(e)}"
+            logging.error(error_message)
+            return render(request, "chamsterapp/nft-profile.html", {"error_message": error_message})
     else:
-        nft_profile = "Error"
-        return render(request, "chamsterapp/nft-profile.html", {"nft_profile": nft_profile})
+        nft_profile = "Error: No ID provided"
+        return render(request, "chamsterapp/nft-profile.html", {"nft_profile": nft_profile})            
 

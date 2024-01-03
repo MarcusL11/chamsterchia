@@ -89,11 +89,15 @@ def nftProfile(request, pk=None):
             chamsters = Chamster.objects.all()
     
             mintgarden_api = f"https://api.mintgarden.io/nfts/{nft_profile.encoded_id}"
-            # tkn1qqqkwv2pvfep3g5e4f3tgyj08khgr83y7v02akgkwv2pvfepsqqq5y62vy Spacescan api
-            response = requests.get(mintgarden_api)
+            dexi_api = "https://api.dexie.space/v2/prices/tickers?ticker_id=USDSC_XCH"
+
+            mintgarden_response = requests.get(mintgarden_api)
+            dexi_response = requests.get(dexi_api)
+
         
-            if response.status_code == 200:
-                mintgarden_api = response.json()
+            if mintgarden_response.status_code and dexi_response.status_code == 200:
+                mintgarden_api = mintgarden_response.json()
+                dexi_api = dexi_response.json()
             
                 average_power = chamsters.aggregate(avg_power=Avg('power'))['avg_power']
                 average_accuracy = chamsters.aggregate(avg_accuracy=Avg('accuracy'))['avg_accuracy']
@@ -103,35 +107,36 @@ def nftProfile(request, pk=None):
 
                 collection_name = mintgarden_api["data"]["metadata_json"]["collection"]["name"]
                 owner_address = mintgarden_api["owner_address"]["id"]
+                
+                if mintgarden_api["owner"] is not None and mintgarden_api["owner"]["encoded_id"] is not None:
+                    owner_did = mintgarden_api["owner"]["encoded_id"]
+                else:
+                    owner_did = None
 
-                # owner_did = mintgarden_api["owner"]["did"]
-                # if owner_did is not None and owner_did != "Null":
-                #     # If owner_did is neither None nor "Null", keep its value
-                #     pass
-                # else:
-                #     owner_did = "Null"
+                xch_price = mintgarden_api.get("xch_price")
+                if xch_price == "Null":
+                    xch_price = None                    
+                
+                usdsc_xch_price = dexi_api["tickers"][0]["last_price"]
+                if usdsc_xch_price:
+                    usdsc_price = 1 / float(usdsc_xch_price)
+                else:
+                    # Handle the case where the last_price is not available or invalid
+                    usdsc_price = "N/A"  # Or any value/error handling that fits your application logic
 
                 if "Legendary" in nft_profile.name:
                     chamster_type = "Legendary"
                 else:
                     chamster_type = "Normal"
 
-                xch_price = mintgarden_api.get("xch_price")
-
-                if xch_price is not None and xch_price != "Null":
-                    # If xch_price is neither None nor "Null", keep its value
-                    pass
-                else:
-                    xch_price = "Make an Offer"
-
-
                 profile_data = {
                     "nft_profile": nft_profile,
                     "collection_name": collection_name,
                     "owner_address": owner_address,
-                    # "owner_did": owner_did,
                     "chamster_type": chamster_type,
                     "xch_price": xch_price,
+                    "usdsc_price": usdsc_price,
+                    "owner_did": owner_did,
                     "avg_data": [
                         average_power,
                         average_accuracy,
@@ -149,7 +154,10 @@ def nftProfile(request, pk=None):
                 }
                 return render(request, "chamsterapp/nft-profile.html", profile_data)
             else:
-                error_message = f"Failed to fetch data from Mintgarden API: {response.status_code}"
+                error_message = {
+                    "mintgarden_api": f"Failed to fetch data from Mintgarden API: {mintgarden_response.status_code}",
+                    "dexi_api": f"Failed to fetch data from Dexi API: {dexi_response.status_code}",
+                }
                 logging.error(error_message)
                 return render(request, "chamsterapp/nft-profile.html", {"error_message": error_message})
         except Chamster.DoesNotExist:

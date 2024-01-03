@@ -108,22 +108,26 @@ def nftProfile(request, pk=None):
                 collection_name = mintgarden_api["data"]["metadata_json"]["collection"]["name"]
                 owner_address = mintgarden_api["owner_address"]["id"]
                 
+                # DID 
                 if mintgarden_api["owner"] is not None and mintgarden_api["owner"]["encoded_id"] is not None:
                     owner_did = mintgarden_api["owner"]["encoded_id"]
                 else:
-                    owner_did = None
+                    owner_did = "DID not available"
 
+                # XCH price
                 xch_price = mintgarden_api.get("xch_price")
-                if xch_price == "Null":
+                if xch_price == None:
                     xch_price = None                    
-                
-                usdsc_xch_price = dexi_api["tickers"][0]["last_price"]
-                if usdsc_xch_price:
-                    usdsc_price = 1 / float(usdsc_xch_price)
+                    usdsc_price = None
                 else:
-                    # Handle the case where the last_price is not available or invalid
-                    usdsc_price = "N/A"  # Or any value/error handling that fits your application logic
+                    # USDSC price                   
+                    usdsc_xch_price = dexi_api["tickers"][0]["last_price"]
+                    if usdsc_xch_price:
+                        usdsc_price = 1 / float(usdsc_xch_price)
+                    else:
+                        usdsc_price = "N/A"  # Or any value/error handling that fits your application logic
 
+                # Chamster type
                 if "Legendary" in nft_profile.name:
                     chamster_type = "Legendary"
                 else:
